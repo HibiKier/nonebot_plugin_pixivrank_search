@@ -11,14 +11,18 @@
 ## 配置
 
 ```
-在.env文件中添加对应的配置
+1.在.env文件中添加对应的配置
 
-RSSHUB = 'https://rsshub.app/' # 默认值，如果有自建可以替换
+    RSSHUB = 'https://rsshub.app/' # 默认值，如果有自建可以替换
 
-# 需要一点魔法才能获取到图片
-# 示例：'http://127.0.0.1:7890'
+    # 需要一点魔法才能获取到图片
+    # 示例：'http://127.0.0.1:7890'
 
-LOCAL_PROXY = ''               # 本地代理，如果本地网络无法访问RSSHUB，建议使用代理
+    LOCAL_PROXY = ''               # 本地代理，如果本地网络无法访问RSSHUB，建议使用代理
+
+
+2.在bot入口文件添加
+  nonebot.load_plugin("nonebot_plugin_pixivrank_search ")
 
 ```
 
