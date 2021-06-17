@@ -22,7 +22,7 @@
 
 
 2.在bot入口文件添加
-  nonebot.load_plugin("nonebot_plugin_pixivrank_search ")
+  nonebot.load_plugin("nonebot_plugin_pixivrank_search")
 
 ```
 
