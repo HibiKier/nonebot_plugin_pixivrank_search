@@ -18,7 +18,7 @@ driver: nonebot.Driver = nonebot.get_driver()
 
 local_proxy = driver.config.local_proxy if driver.config.local_proxy else None
 
-rsshub = driver.config.local_proxy if driver.config.rsshub else 'https://rsshub.app/'
+rsshub = driver.config.rsshub if driver.config.rsshub else 'https://rsshub.app/'
 
 IMAGE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__))) + '/'
 if not os.path.exists(f'{IMAGE_PATH}/tmp/'):
