@@ -68,4 +68,8 @@ __search_usage__ = '''P站搜图帮助：
 
 
 ```
+## 更新
 
+### 2021/6/19
+
+* 添加了一个requirements.txt
