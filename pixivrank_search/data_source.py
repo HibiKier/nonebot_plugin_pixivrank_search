@@ -20,10 +20,11 @@ local_proxy = driver.config.local_proxy if driver.config.local_proxy else None
 
 rsshub = driver.config.rsshub if driver.config.rsshub else 'https://rsshub.app/'
 
+
 IMAGE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__))) + '/'
 if not os.path.exists(f'{IMAGE_PATH}/tmp/'):
     os.mkdir(f'{IMAGE_PATH}/tmp/')
-IMAGE_PATH += 'tmp/'
+IMAGE_PATH += '/tmp/'
 
 
 async def get_pixiv_urls(mode: str, num: int = 5, date: str = '') -> 'list, list, int':
@@ -42,7 +43,7 @@ async def download_pixiv_imgs(urls: list, user_id: int) -> str:
     for img in urls:
         async with aiohttp.ClientSession(headers=headers) as session:
             for _ in range(3):
-                async with session.get(img, proxy=local_proxy, timeout=2) as response:
+                async with session.get(img, proxy=local_proxy, timeout=10) as response:
                     # print(response.url)
                     async with aiofiles.open(IMAGE_PATH + f'/{user_id}_{index}_pixiv.jpg', 'wb') as f:
                         try:
@@ -59,7 +60,7 @@ async def download_pixiv_imgs(urls: list, user_id: int) -> str:
 
 
 async def search_pixiv_urls(keyword: str, num: int, order: str, r18: int) -> 'list, list':
-    url = 'https://rsshub.app/pixiv/search/{}/{}/{}'.format(keyword, order, r18)
+    url = f'{rsshub}/pixiv/search/{keyword}/{order}/{r18}'
     return await parser_data(url, num)
 
 
@@ -70,7 +71,6 @@ async def parser_data(url: str, num: int) -> 'list, list, int':
         for _ in range(3):
             try:
                 async with session.get(url, proxy=local_proxy, timeout=2) as response:
-                    print(response.url)
                     data = feedparser.parse(await response.text())['entries']
                     break
             except TimeoutError:
@@ -93,9 +93,7 @@ async def parser_data(url: str, num: int) -> 'list, list, int':
                 for p in pl[1:]:
                     imgs.append(p.find('img').get('src'))
                 urls.append(imgs)
-        except ValueError:
+        except ValueError as e:
+            print(f'解析数据错误...e：{e}')
             return ['是网站坏了啊，也许过一会就好了'], [], 999
         return text_list, urls, 200
-
-
-# asyncio.get_event_loop().run_until_complete(get_pixiv_urls('day'))
