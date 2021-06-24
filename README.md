@@ -70,6 +70,10 @@ __search_usage__ = '''P站搜图帮助：
 ```
 ## 更新
 
+### 2021/6/24
+
+* 修复自定义rsshub时URL后缺少"/"会生成错误的查询URL，感谢 ![Jerry痞孓](https://github.com/Jerry-FaGe) 的pr！
+
 ### 2021/6/19
 
 * 添加了一个requirements.txt
