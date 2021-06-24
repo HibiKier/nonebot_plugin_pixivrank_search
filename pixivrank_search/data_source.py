@@ -19,6 +19,7 @@ driver: nonebot.Driver = nonebot.get_driver()
 local_proxy = driver.config.local_proxy if driver.config.local_proxy else None
 
 rsshub = driver.config.rsshub if driver.config.rsshub else 'https://rsshub.app/'
+rsshub = rsshub[:-1] if rsshub[-1] == "/" else rsshub
 
 
 IMAGE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__))) + '/'
@@ -28,7 +29,7 @@ IMAGE_PATH += '/tmp/'
 
 
 async def get_pixiv_urls(mode: str, num: int = 5, date: str = '') -> 'list, list, int':
-    url = f'{rsshub}pixiv/ranking/{mode}'
+    url = f'{rsshub}/pixiv/ranking/{mode}'
     if date:
         url += f'/{date}'
     try:
