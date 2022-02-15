@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "nonebot_plugin_pixivrank_search"
+version = "0.2"
+description = "基于RSSHUB阅读器实现的获取P站排行和P站搜图"
+authors = ["HibiKier <775757368@qq.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "3.7.3"
+nonebot2 = "^2.0.0-beta.2"
+nonebot-adapter-onebot = "^2.0.0-beta.1"
+aiohttp = "^3.8.1"
+aiofiles = "^0.8.0"
+beautifulsoup4 = "^4.10.0"
+lxml = "^4.7.1"
+feedparser = "^6.0.8"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

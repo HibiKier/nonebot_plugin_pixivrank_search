@@ -1,12 +1,12 @@
-from nonebot.typing import T_State
-from nonebot.adapters.cqhttp import Bot, MessageEvent
+from nonebot.adapters.onebot.v11 import MessageEvent, Message
+from nonebot.params import CommandArg
 from nonebot import on_command
 from .util import UserExistLimiter, is_number
 from .data_source import get_pixiv_urls, download_pixiv_imgs, search_pixiv_urls
-import time
-from nonebot.adapters.cqhttp.exception import NetworkError
+from nonebot.adapters.onebot.v11.exception import NetworkError
 from asyncio.exceptions import TimeoutError
 from aiohttp.client_exceptions import ClientConnectorError
+import time
 
 __plugin_name__ = 'P站'
 
@@ -64,12 +64,14 @@ pixiv_keyword = on_command('搜图', priority=5, block=True)
 
 
 @pixiv_rank.handle()
-async def _(bot: Bot, event: MessageEvent, state: T_State):
-    msg = str(event.get_message()).strip()
+async def _(event: MessageEvent, arg: Message = CommandArg()):
+    msg = arg.extract_plain_text().strip()
     if msg in ['帮助']:
         await pixiv_rank.finish(__rank_usage__)
     msg = msg.split(' ')
     msg = [m for m in msg if m]
+    code = 0
+    text_list = ["失败了..."]
     if not msg:
         msg = ['1']
     if msg[0] in ['6', '7', '8', '9']:
@@ -112,8 +114,8 @@ async def _(bot: Bot, event: MessageEvent, state: T_State):
 
 
 @pixiv_keyword.handle()
-async def _(bot: Bot, event: MessageEvent, state: T_State):
-    msg = str(event.get_message()).strip()
+async def _(event: MessageEvent, arg: Message = CommandArg()):
+    msg = arg.extract_plain_text().strip()
     if msg in ['帮助']:
         await pixiv_rank.finish(__search_usage__)
     if event.message_type == 'group':

@@ -1,12 +1,12 @@
+from nonebot.adapters.onebot.v11 import MessageSegment
+from asyncio.exceptions import TimeoutError
+from aiohttp.client_exceptions import ClientConnectorError
+from bs4 import BeautifulSoup
 import aiohttp
 import aiofiles
 import nonebot
-from bs4 import BeautifulSoup
 import feedparser
-from nonebot.adapters.cqhttp import MessageSegment
 import os
-from asyncio.exceptions import TimeoutError
-from aiohttp.client_exceptions import ClientConnectorError
 import platform
 if platform.system() == 'Windows':
     import asyncio
@@ -95,6 +95,5 @@ async def parser_data(url: str, num: int) -> 'list, list, int':
                     imgs.append(p.find('img').get('src'))
                 urls.append(imgs)
         except ValueError as e:
-            print(f'解析数据错误...e：{e}')
             return ['是网站坏了啊，也许过一会就好了'], [], 999
         return text_list, urls, 200
