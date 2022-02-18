@@ -4,7 +4,7 @@ from nonebot import get_driver
 
 class Config(BaseModel, extra=Extra.ignore):
     local_proxy: str
-    rsshub: str
+    rsshub: str = "https://rsshub.app/"
 
 
 config = Config.parse_obj(get_driver().config)
