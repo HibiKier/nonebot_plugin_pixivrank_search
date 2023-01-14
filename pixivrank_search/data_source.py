@@ -10,10 +10,10 @@ import feedparser
 import os
 import platform
 
-if platform.system() == "Windows":
-    import asyncio
-
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+# if platform.system() == "Windows":
+#     import asyncio
+# 
+#     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 headers = {
     "User-Agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; TencentTraveler 4.0)"
